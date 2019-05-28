@@ -1,0 +1,26 @@
+{
+  "name": "pricing-selector-component",
+  "description": "Fetches pricing data from Chargebee",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint pricing-selector-component.mjs",
+    "pretest-ci": "npm run lint",
+    "test-ci": "wdio wdio.conf.js",
+    "prebuild": "mkdir -p build && cp pricing-selector-component-test.html build",
+    "build": "terser pricing-selector-component.mjs --compesss --mangle --output build/pricing-selector-component.mjs"
+  },
+  "devDependencies": {
+    "acorn": "^6.1.1",
+    "@wdio/cli": "^5.9.1",
+    "@wdio/dot-reporter": "^5.7.8",
+    "@wdio/local-runner": "^5.9.1",
+    "@wdio/mocha-framework": "^5.9.1",
+    "@wdio/sync": "^5.9.1",
+    "eslint": "^5.16.0",
+    "terser": "^4.0.0"
+  },
+  "dependencies": {
+    "chromedriver": "^74.0.0",
+    "http-server": "^0.11.1"
+  }
+}
