@@ -18,9 +18,5 @@
     "@wdio/sync": "^5.9.1",
     "eslint": "^5.16.0",
     "terser": "^4.0.0"
-  },
-  "dependencies": {
-    "chromedriver": "^74.0.0",
-    "http-server": "^0.11.1"
   }
 }
