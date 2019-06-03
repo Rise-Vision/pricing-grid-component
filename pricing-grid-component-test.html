@@ -1,7 +1,7 @@
 <html>
   <head>
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js"></script>
-    <script type="module" src="pricing-selector-component.mjs"></script>
+    <script type="module" src="pricing-grid-component.mjs"></script>
     <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css"></link>
     <script src="https://unpkg.com/chai/chai.js"></script>
     <script src="https://unpkg.com/mocha/mocha.js"></script>
@@ -26,10 +26,10 @@
       mocha.checkLeaks();
     </script>
     <script>
-      describe("pricing-selector-component", ()=>{
+      describe("pricing-grid-component", ()=>{
         beforeEach(()=>{
           document.getElementById("component-container")
-          .appendChild(document.createElement("pricing-selector-component"));
+          .appendChild(document.createElement("pricing-grid-component"));
           return new Promise(res=>setTimeout(res, 250));
         });
 
@@ -39,29 +39,10 @@
         });
 
         it("exists", ()=>{
-          chai.assert(document.querySelector("pricing-selector-component"));
+          chai.assert(document.querySelector("pricing-grid-component"));
         });
 
-        it("does not show display prompt by default", ()=>{
-          const hidden =
-            document.querySelector("pricing-selector-component")
-            .shadowRoot.querySelector("#displayCountSection").hasAttribute("hidden");
-
-          chai.assert(hidden);
-        });
-
-        it("shows display prompt if attribute is set to true", ()=>{
-          document.querySelector("pricing-selector-component")
-          .setAttribute("show-display-count-section", "");
-
-          const hidden =
-            document.querySelector("pricing-selector-component")
-            .shadowRoot.querySelector("#displayCountSection").hasAttribute("hidden");
-
-          chai.assert(!hidden);
-        });
-
-        it("calculates yearly price savings when pricing data is available", ()=>{
+        it("selects correct pricing tier when pricing data is available", ()=>{
           const pricingData = [
             {
               "name": "Unused three year plan",
@@ -139,16 +120,16 @@
               ]
             }
           ];
-          document.querySelector("pricing-selector-component")
-          .setAttribute("show-period-section", "");
+          document.querySelector("pricing-grid-component")
+          .displayCount = 5;
 
-          document.querySelector("pricing-selector-component")
+          document.querySelector("pricing-grid-component")
           .pricingData = pricingData;
 
-          const savings =
-            document.querySelector("pricing-selector-component").yearlySavings;
+          const isAdvanced =
+            document.querySelector("pricing-grid-component").isTierSelected(5, pricingData, 2);
 
-          chai.assert.equal(savings, "Save $900 every year!");
+          chai.assert.equal(isAdvanced, true);
         });
       });
     </script>

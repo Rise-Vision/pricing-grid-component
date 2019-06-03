@@ -2,8 +2,8 @@ const assert = require("assert");
 COMPLETION_TIMEOUT = 10000;
 RETRY_DELAY = 3000;
 
-describe("pricing-selector-component", ()=>{
-  browser.url("http://localhost:8080/pricing-selector-component-test.html");
+describe("pricing-grid-component", ()=>{
+  browser.url("http://localhost:8080/pricing-grid-component-test.html");
   it("passes in-browser tests", ()=>{
     let allTestsPassed = null;
 
