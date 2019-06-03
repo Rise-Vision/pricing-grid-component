@@ -4,38 +4,37 @@
     <script type="module" src="pricing-grid-component.mjs"></script>
   </head>
   <body>
-    <pricing-grid-component></pricing-grid-component>
-    
+    <pricing-grid-component display-count="5" period="yearly"></pricing-grid-component>
     
     <script>
     const pricingData = [
         {
           "name": "Digital Displays Monthly Plan",
           "period": 1,
-          "period_unit": "month",
+          "period_unit": "year",
           "currency_code": "USD",
           "tiers": [
               {
                   "starting_unit": 4,
                   "ending_unit": 8,
-                  "price": 900,
+                  "price": 9800,
                   "object": "tier"
                 },
             {
               "starting_unit": 1,
               "ending_unit": 3,
-              "price": 1000,
+              "price": 11000,
               "object": "tier"
             },
             {
                 "starting_unit": 12,
-                "price": 700,
+                "price": 8400,
                 "object": "tier"
               },
             {
               "starting_unit": 8,
               "ending_unit": 11,
-              "price": 800,
+              "price": 8700,
               "object": "tier"
             }
 
@@ -45,9 +44,6 @@
      
       document.querySelector("pricing-grid-component")
       .pricingData = pricingData;
-      
-      document.querySelector("pricing-grid-component")
-      .displayCount = 5;
     </script>
     
   </body>

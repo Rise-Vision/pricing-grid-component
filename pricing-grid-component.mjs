@@ -6,20 +6,24 @@ class PricingGridComponent extends PolymerElement {
       displayCount: {type: Number, value: 2, reflectToAttribute: true, notify: true},
       period: {type: String, value: "monthly", reflectToAttribute: true, notify: true},
       currency: {type: String, value: "USD", reflectToAttribute: true, notify: true},
-      isStarter: {type: Boolean, computed: "isTierSelected(displayCount, pricingData, 0)"},
-      isBasic: {type: Boolean, computed: "isTierSelected(displayCount, pricingData, 1)"},
-      isAdvanced: {type: Boolean, computed: "isTierSelected(displayCount, pricingData, 2)"},
-      isEnterprise: {type: Boolean, computed: "isTierSelected(displayCount,  pricingData, 3)"},
+      isStarter: {type: Boolean, computed: "isTierSelected(displayCount, period,  pricingData, 0)"},
+      isBasic: {type: Boolean, computed: "isTierSelected(displayCount, period, pricingData, 1)"},
+      isAdvanced: {type: Boolean, computed: "isTierSelected(displayCount, period, pricingData, 2)"},
+      isEnterprise: {type: Boolean, computed: "isTierSelected(displayCount, period, pricingData, 3)"},
       pricingData: {type: Object, value: {}}
     };
   }
   
-  getTiers(pricingData) {
+  getTiers(pricingData, period = "monthly") {
   
     if (Object.keys(pricingData).length === 0) {return undefined;}
     
+    const periodUnit = period.endsWith("ly") ? this.period.slice(0,-2) : "";
+
+    if (periodUnit === "") {return undefined;}
+
     const planObj = pricingData.filter(plan=>{
-      return plan.period === 1 && plan.period_unit === "month" && plan.currency_code === this.currency;
+      return plan.period === 1 && plan.period_unit === periodUnit && plan.currency_code === this.currency;
     })[0];
     
     if (!planObj) {return undefined;}
@@ -34,21 +38,23 @@ class PricingGridComponent extends PolymerElement {
     
   }
   
-  getPrice(pricingData, tierIndex) {
+  getPrice(pricingData, period, tierIndex) {
   
-    const tiers = this.getTiers(pricingData);
+    const tiers = this.getTiers(pricingData, period);
   
     if (!tiers) {return undefined;}
     
     const pricePennies = tiers[tierIndex].price;
+
+    const monthlyPricePennies = period === "yearly" ? pricePennies / 12 : pricePennies;
     
-    return (pricePennies / 100).toFixed(2);
+    return (monthlyPricePennies / 100).toFixed(2);
     
   }
   
-  getLowerLimit(pricingData, tierIndex) {
+  getLowerLimit(pricingData, period, tierIndex) {
   
-    const tiers = this.getTiers(pricingData);
+    const tiers = this.getTiers(pricingData, period);
   
     if (!tiers) {return undefined;}
     
@@ -56,7 +62,7 @@ class PricingGridComponent extends PolymerElement {
     
   }
   
-  getUpperLimit(pricingData, tierIndex) {
+  getUpperLimit(pricingData, period, tierIndex) {
   
     const tiers = this.getTiers(pricingData);
   
@@ -66,10 +72,10 @@ class PricingGridComponent extends PolymerElement {
     
   }
   
-  isTierSelected(displayCount, pricingData, tierIndex){
+  isTierSelected(displayCount, period,  pricingData, tierIndex){
   
-    const lowerLimit = this.getLowerLimit(pricingData, tierIndex);
-    const upperLimit = this.getUpperLimit(pricingData, tierIndex);
+    const lowerLimit = this.getLowerLimit(pricingData, period, tierIndex);
+    const upperLimit = this.getUpperLimit(pricingData, period, tierIndex);
     
     return lowerLimit <= displayCount && (!upperLimit || displayCount <= upperLimit);
   }
@@ -137,10 +143,10 @@ class PricingGridComponent extends PolymerElement {
       <div id="main">
 
           <div id="gridContainer" class="gridRectangle">
-            <div id="tierStarter" class="gridRow" selected$=[[isStarter]]><span class="tierName">Starter</span><span class="tierDisplays">[[getLowerLimit(pricingData, 0)]]-[[getUpperLimit(pricingData, 0)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, 0)]]</span></div>
-            <div id="tierBasic" class="gridRow" selected$=[[isBasic]]><span class="tierName">Basic</span><span class="tierDisplays">[[getLowerLimit(pricingData, 1)]]-[[getUpperLimit(pricingData, 1)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, 1)]]</span></div>
-            <div id="tierAdvanced" class="gridRow" selected$=[[isAdvanced]]><span class="tierName">Advanced</span><span class="tierDisplays">[[getLowerLimit(pricingData, 2)]]-[[getUpperLimit(pricingData, 2)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, 2)]]</span></div>
-            <div id="tierEnterprise" class="gridRow" selected$=[[isEnterprise]]><span class="tierName">Enterprise</span><span class="tierDisplays">[[getLowerLimit(pricingData, 3)]] or more Displays</span> <span class="tierPrice">$[[getPrice(pricingData, 3)]]</span></div>
+            <div id="tierStarter" class="gridRow" selected$=[[isStarter]]><span class="tierName">Starter</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 0)]]-[[getUpperLimit(pricingData, period, 0)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 0)]]</span></div>
+            <div id="tierBasic" class="gridRow" selected$=[[isBasic]]><span class="tierName">Basic</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 1)]]-[[getUpperLimit(pricingData, period, 1)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 1)]]</span></div>
+            <div id="tierAdvanced" class="gridRow" selected$=[[isAdvanced]]><span class="tierName">Advanced</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 2)]]-[[getUpperLimit(pricingData, period, 2)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 2)]]</span></div>
+            <div id="tierEnterprise" class="gridRow" selected$=[[isEnterprise]]><span class="tierName">Enterprise</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 3)]] or more Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 3)]]</span></div>
           </div>
       </div>
     `;

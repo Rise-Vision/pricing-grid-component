@@ -27,6 +27,84 @@
     </script>
     <script>
       describe("pricing-grid-component", ()=>{
+        const pricingData = [
+          {
+            "name": "Unused three year plan",
+            "period": 3,
+            "period_unit": "year",
+            "currency_code": "CAD",
+            "tiers": [
+              {
+                "starting_unit": 12,
+                "price": 20790,
+                "object": "tier"
+              },
+            ]
+          },
+          {
+            "name": "Digital Displays Annual Plan",
+            "period": 1,
+            "period_unit": "year",
+            "currency_code": "USD",
+            "tiers": [
+              {
+                "starting_unit": 1,
+                "ending_unit": 1,
+                "price": 11000,
+                "object": "tier"
+              },
+              {
+                "starting_unit": 2,
+                "ending_unit": 3,
+                "price": 9900,
+                "object": "tier"
+              },
+              {
+                "starting_unit": 4,
+                "ending_unit": 11,
+                "price": 8800,
+                "object": "tier"
+              },
+              {
+                "starting_unit": 12,
+                "price": 7700,
+                "object": "tier"
+              }
+            ]
+          },
+          {
+            "name": "Digital Displays Monthly Plan",
+            "period": 1,
+            "period_unit": "month",
+            "currency_code": "USD",
+            "tiers": [
+              {
+                "starting_unit": 1,
+                "ending_unit": 1,
+                "price": 1000,
+                "object": "tier"
+              },
+              {
+                "starting_unit": 2,
+                "ending_unit": 3,
+                "price": 900,
+                "object": "tier"
+              },
+              {
+                "starting_unit": 4,
+                "ending_unit": 11,
+                "price": 800,
+                "object": "tier"
+              },
+              {
+                "starting_unit": 12,
+                "price": 700,
+                "object": "tier"
+              }
+            ]
+          }
+        ];
+
         beforeEach(()=>{
           document.getElementById("component-container")
           .appendChild(document.createElement("pricing-grid-component"));
@@ -43,93 +121,37 @@
         });
 
         it("selects correct pricing tier when pricing data is available", ()=>{
-          const pricingData = [
-            {
-              "name": "Unused three year plan",
-              "period": 3,
-              "period_unit": "year",
-              "currency_code": "CAD",
-              "tiers": [
-                {
-                  "starting_unit": 12,
-                  "price": 20790,
-                  "object": "tier"
-                },
-              ]
-            },
-            {
-              "name": "Digital Displays Annual Plan",
-              "period": 1,
-              "period_unit": "year",
-              "currency_code": "USD",
-              "tiers": [
-                {
-                  "starting_unit": 12,
-                  "price": 7700,
-                  "object": "tier"
-                },
-                {
-                  "starting_unit": 4,
-                  "ending_unit": 11,
-                  "price": 8800,
-                  "object": "tier"
-                },
-                {
-                  "starting_unit": 2,
-                  "ending_unit": 3,
-                  "price": 9900,
-                  "object": "tier"
-                },
-                {
-                  "starting_unit": 1,
-                  "ending_unit": 1,
-                  "price": 11000,
-                  "object": "tier"
-                }
-              ]
-            },
-            {
-              "name": "Digital Displays Monthly Plan",
-              "period": 1,
-              "period_unit": "month",
-              "currency_code": "USD",
-              "tiers": [
-                {
-                  "starting_unit": 1,
-                  "ending_unit": 1,
-                  "price": 1000,
-                  "object": "tier"
-                },
-                {
-                  "starting_unit": 2,
-                  "ending_unit": 3,
-                  "price": 900,
-                  "object": "tier"
-                },
-                {
-                  "starting_unit": 4,
-                  "ending_unit": 11,
-                  "price": 800,
-                  "object": "tier"
-                },
-                {
-                  "starting_unit": 12,
-                  "price": 700,
-                  "object": "tier"
-                }
-              ]
-            }
-          ];
-          document.querySelector("pricing-grid-component")
-          .displayCount = 5;
+          const component = document.querySelector("pricing-grid-component");
 
-          document.querySelector("pricing-grid-component")
-          .pricingData = pricingData;
+          component.displayCount = 5;
+          component.pricingData = pricingData;
 
-          const isAdvanced =
-            document.querySelector("pricing-grid-component").isTierSelected(5, pricingData, 2);
+          chai.assert.equal(component.isAdvanced, true);
+        });
 
-          chai.assert.equal(isAdvanced, true);
+        it("shows annual pricing / 12 when yearly period is selected", ()=>{
+          const component = document.querySelector("pricing-grid-component");
+          const advancedTier = component.shadowRoot.getElementById("tierAdvanced");
+          const expectedPrice = `$${(pricingData[1].tiers[2].price / 1200).toFixed(2)}`;
+
+          component.displayCount = 5;
+          component.pricingData = pricingData;
+          component.period = "yearly"
+
+          chai.assert.equal(advancedTier.querySelectorAll("span")[2].innerText, "$7.33");
+        });
+
+        it("shows monthly pricing when monthly period is selected", ()=>{
+          const component = document.querySelector("pricing-grid-component");
+          const advancedTier = component.shadowRoot.getElementById("tierAdvanced");
+          const expectedPrice = `$${(pricingData[2].tiers[2].price / 100).toFixed(2)}`;
+
+          console.log(pricingData[1].tiers);
+          component.displayCount = 5;
+          component.pricingData = pricingData;
+          component.period = "monthly"
+
+          chai.assert.equal(advancedTier.querySelectorAll("span")[2].innerText, expectedPrice);
         });
       });
     </script>
