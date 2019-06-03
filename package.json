@@ -1,13 +1,13 @@
 {
-  "name": "pricing-selector-component",
-  "description": "Fetches pricing data from Chargebee",
+  "name": "pricing-grid-component",
+  "description": "Displays pricing tiers",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint pricing-selector-component.mjs",
+    "lint": "eslint pricing-grid-component.mjs",
     "pretest-ci": "npm run lint",
     "test-ci": "wdio wdio.conf.js",
-    "prebuild": "mkdir -p build && cp pricing-selector-component-test.html build",
-    "build": "terser pricing-selector-component.mjs --compesss --mangle --output build/pricing-selector-component.mjs"
+    "prebuild": "mkdir -p build && cp pricing-grid-component-test.html build",
+    "build": "terser pricing-grid-component.mjs --compesss --mangle --output build/pricing-grid-component.mjs"
   },
   "devDependencies": {
     "acorn": "^6.1.1",

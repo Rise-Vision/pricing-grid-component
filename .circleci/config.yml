@@ -46,8 +46,8 @@ jobs:
           name: Copy to gcs
           command: |
             if [ $CIRCLE_BRANCH=master ];then CHANNEL=stable; else CHANNEL=staging; fi
-            GCS_PATH=gs://widgets.risevision.com/$CHANNEL/components/pricing/pricing-selector-component.mjs
-            gsutil cp build/pricing-selector-component.mjs $GCS_PATH
+            GCS_PATH=gs://widgets.risevision.com/$CHANNEL/components/pricing/pricing-grid-component.mjs
+            gsutil cp build/pricing-grid-component.mjs $GCS_PATH
             gsutil -m setmeta -r -h "Cache-Control:private, max-age=0" -h "content-type: text/javascript" $GCS_PATH
             gsutil acl -r ch -u AllUsers:R $GCS_PATH
 
