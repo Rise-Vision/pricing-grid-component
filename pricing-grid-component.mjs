@@ -16,7 +16,7 @@ class PricingGridComponent extends PolymerElement {
   
   getTiers(pricingData, period = "monthly") {
   
-    if (Object.keys(pricingData).length === 0) {return undefined;}
+    if (!pricingData || Object.keys(pricingData).length === 0) {return undefined;}
     
     const periodUnit = period.endsWith("ly") ? this.period.slice(0,-2) : "";
 
