@@ -88,66 +88,116 @@ class PricingGridComponent extends PolymerElement {
           text-align: center;
         }
         .gridRectangle {
-          width: 100%;
-          height: 327px;
+          height: 100%;
           border-radius: 5px;
           border: solid 1px #979797;
+          padding: 0 1em;
         }
         .gridRow {
-          width: 100%;
-          height: 82px;
+          height: 5em;
+          padding: 0 0.5em;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           box-shadow: inset 0 -1px 0 0 #979797;
         }
         .gridRow[selected] {
           background-color: #e8e8e8;
           box-shadow:inset 0px 0px 0px 2px #000000;
         }
+        .tierDescription {
+          align-items: center;
+        }
         .tierName {
-          float:left;
-          margin-left:1em;
           font-family: ProximaNova;
           font-size: 24px;
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
-          line-height: 82px;
           letter-spacing: normal;
           color: #979797;
+          margin-right: 1em;
         }
         .tierDisplays {
-          float:left;
-          margin-left:1em;
           font-family: ProximaNova;
           font-size: 16px;
           font-weight: 500;
           font-style: normal;
           font-stretch: normal;
-          line-height: 82px;
           letter-spacing: normal;
           color: #979797;
         }
         .tierPrice {
-          float:right;
-          margin-right:1em;
           font-family: ProximaNova;
           font-size: 24px;
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
-          line-height: 82px;
           letter-spacing: normal;
           text-align: right;
           color: #979797;
         }
+        .tierDescription {
+          display: flex;
+          margin: 0;
+          width: 70%;
+        }
+        @media (max-width: 767px) {
+          .gridRow {
+            text-align: left;
+          }
+          .tierName {
+            margin: 0;
+          }
+          .tierDisplays {
+            margin: 0;
+            display: block;
+          }
+          .tierDescription {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
       </style>
       <div id="main">
-
-          <div id="gridContainer" class="gridRectangle">
-            <div id="tierStarter" class="gridRow" selected$=[[isStarter]]><span class="tierName">Starter</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 0)]]-[[getUpperLimit(pricingData, period, 0)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 0)]]</span></div>
-            <div id="tierBasic" class="gridRow" selected$=[[isBasic]]><span class="tierName">Basic</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 1)]]-[[getUpperLimit(pricingData, period, 1)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 1)]]</span></div>
-            <div id="tierAdvanced" class="gridRow" selected$=[[isAdvanced]]><span class="tierName">Advanced</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 2)]]-[[getUpperLimit(pricingData, period, 2)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 2)]]</span></div>
-            <div id="tierEnterprise" class="gridRow" selected$=[[isEnterprise]]><span class="tierName">Enterprise</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 3)]] or more Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 3)]]</span></div>
+        <div id="gridContainer" class="gridRectangle">
+          <div id="tierStarter" class="gridRow" selected$=[[isStarter]]>
+            <div class="tierDescription">
+              <span class="tierName">Starter</span>
+              <span class="tierDisplays">
+                [[getLowerLimit(pricingData, period, 0)]]-[[getUpperLimit(pricingData, period, 0)]] Displays
+              </span>
+            </div>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 0)]]</span>
           </div>
+          <div id="tierBasic" class="gridRow" selected$=[[isBasic]]>
+            <div class="tierDescription">
+              <span class="tierName">Basic</span>
+              <span class="tierDisplays">
+                [[getLowerLimit(pricingData, period, 1)]]-[[getUpperLimit(pricingData, period, 1)]] Displays
+              </span>
+            </div>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 1)]]</span>
+          </div>
+          <div id="tierAdvanced" class="gridRow" selected$=[[isAdvanced]]>
+            <div class="tierDescription">
+              <span class="tierName">Advanced</span>
+              <span class="tierDisplays">
+                [[getLowerLimit(pricingData, period, 2)]]-[[getUpperLimit(pricingData, period, 2)]] Displays
+              </span>
+            </div>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 2)]]</span>
+          </div>
+          <div id="tierEnterprise" class="gridRow" selected$=[[isEnterprise]]>
+            <div class="tierDescription">
+              <span class="tierName">Enterprise</span>
+              <span class="tierDisplays">
+                [[getLowerLimit(pricingData, period, 3)]] or more Displays
+              </span>
+            </div>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 3)]]</span>
+          </div>
+        </div>
       </div>
     `;
   }
