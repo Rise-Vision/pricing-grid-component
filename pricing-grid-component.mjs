@@ -141,13 +141,36 @@ class PricingGridComponent extends PolymerElement {
         }
       </style>
       <div id="main">
-
-          <div id="gridContainer" class="gridRectangle">
-            <div id="tierStarter" class="gridRow" selected$=[[isStarter]]><span class="tierName">Starter</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 0)]]-[[getUpperLimit(pricingData, period, 0)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 0)]]</span></div>
-            <div id="tierBasic" class="gridRow" selected$=[[isBasic]]><span class="tierName">Basic</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 1)]]-[[getUpperLimit(pricingData, period, 1)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 1)]]</span></div>
-            <div id="tierAdvanced" class="gridRow" selected$=[[isAdvanced]]><span class="tierName">Advanced</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 2)]]-[[getUpperLimit(pricingData, period, 2)]] Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 2)]]</span></div>
-            <div id="tierEnterprise" class="gridRow" selected$=[[isEnterprise]]><span class="tierName">Enterprise</span><span class="tierDisplays">[[getLowerLimit(pricingData, period, 3)]] or more Displays</span> <span class="tierPrice">$[[getPrice(pricingData, period, 3)]]</span></div>
+        <div id="gridContainer" class="gridRectangle">
+          <div id="tierStarter" class="gridRow" selected$=[[isStarter]]>
+            <span class="tierName">Starter</span>
+            <span class="tierDisplays">
+              [[getLowerLimit(pricingData, period, 0)]]-[[getUpperLimit(pricingData, period, 0)]] Displays
+            </span>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 0)]]</span>
           </div>
+          <div id="tierBasic" class="gridRow" selected$=[[isBasic]]>
+            <span class="tierName">Basic</span>
+            <span class="tierDisplays">
+              [[getLowerLimit(pricingData, period, 1)]]-[[getUpperLimit(pricingData, period, 1)]] Displays
+            </span>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 1)]]</span>
+          </div>
+          <div id="tierAdvanced" class="gridRow" selected$=[[isAdvanced]]>
+            <span class="tierName">Advanced</span>
+            <span class="tierDisplays">
+              [[getLowerLimit(pricingData, period, 2)]]-[[getUpperLimit(pricingData, period, 2)]] Displays
+            </span>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 2)]]</span>
+          </div>
+          <div id="tierEnterprise" class="gridRow" selected$=[[isEnterprise]]>
+            <span class="tierName">Enterprise</span>
+            <span class="tierDisplays">
+              [[getLowerLimit(pricingData, period, 3)]] or more Displays
+            </span>
+            <span class="tierPrice">$[[getPrice(pricingData, period, 3)]]</span>
+          </div>
+        </div>
       </div>
     `;
   }
