@@ -91,7 +91,6 @@ class PricingGridComponent extends PolymerElement {
           height: 100%;
           border-radius: 5px;
           border: solid 1px #979797;
-          padding: 0 1em;
         }
         .gridRow {
           height: 5em;
