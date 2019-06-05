@@ -99,6 +99,9 @@ class PricingGridComponent extends PolymerElement {
           justify-content: space-between;
           box-shadow: inset 0 -1px 0 0 #979797;
         }
+        .gridRow:last-child {
+          box-shadow: none;
+        }
         .gridRow[selected] {
           background-color: #e8e8e8;
           box-shadow:inset 0px 0px 0px 2px #000000;
