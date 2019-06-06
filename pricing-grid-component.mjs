@@ -88,12 +88,15 @@ class PricingGridComponent extends PolymerElement {
           text-align: center;
         }
         .gridRectangle {
+          height: 100%;
           border-radius: 5px;
           border: solid 1px #979797;
+          display: flex;
+          flex-direction: column;
         }
         .gridRow {
-          height: 5em;
-          padding: 0 0.5em;
+          padding: 0.7em;
+          flex-grow: 1;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -106,12 +109,16 @@ class PricingGridComponent extends PolymerElement {
           background-color: #e8e8e8;
           box-shadow:inset 0px 0px 0px 2px #000000;
         }
+        .gridRow[selected] .tierName,.gridRow[selected] .tierPrice {
+          color: black;
+        }
+
         .tierDescription {
           align-items: center;
         }
         .tierName {
           font-family: ProximaNova;
-          font-size: 24px;
+          font-size: 1.5em;;
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
@@ -121,7 +128,6 @@ class PricingGridComponent extends PolymerElement {
         }
         .tierDisplays {
           font-family: ProximaNova;
-          font-size: 16px;
           font-weight: 500;
           font-style: normal;
           font-stretch: normal;
@@ -130,7 +136,7 @@ class PricingGridComponent extends PolymerElement {
         }
         .tierPrice {
           font-family: ProximaNova;
-          font-size: 24px;
+          font-size: 1.5em;
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
