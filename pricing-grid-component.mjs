@@ -1,12 +1,24 @@
 import {PolymerElement, html} from "https://unpkg.com/@polymer/polymer@next/polymer-element.js?module"
 
 class PricingGridComponent extends PolymerElement {
+  constructor() {
+    super();
+
+    this.tierNames = [
+      "Starter",
+      "Basic",
+      "Advanced",
+      "Enterprise"
+    ];
+  }
+
   static get properties() {
     return {
       displayCount: {type: Number, value: 2, reflectToAttribute: true, notify: true},
       period: {type: String, value: "monthly", reflectToAttribute: true, notify: true},
       currency: {type: String, value: "USD", reflectToAttribute: true, notify: true},
-      isStarter: {type: Boolean, computed: "isTierSelected(displayCount, period,  pricingData, 0)"},
+      tierName: {type: String, computed: "getTierName(displayCount, period, pricingData)", notify: true},
+      isStarter: {type: Boolean, computed: "isTierSelected(displayCount, period, pricingData, 0)"},
       isBasic: {type: Boolean, computed: "isTierSelected(displayCount, period, pricingData, 1)"},
       isAdvanced: {type: Boolean, computed: "isTierSelected(displayCount, period, pricingData, 2)"},
       isEnterprise: {type: Boolean, computed: "isTierSelected(displayCount, period, pricingData, 3)"},
@@ -79,7 +91,13 @@ class PricingGridComponent extends PolymerElement {
     
     return lowerLimit <= displayCount && (!upperLimit || displayCount <= upperLimit);
   }
-  
+
+  getTierName(displayCount, period, pricingData) {
+    return this.tierNames.filter((name, idx)=>{
+      return this.isTierSelected(displayCount, period, pricingData, idx);
+    })[0];
+  }
+
   static get template() {
     return html`
       <style>
