@@ -174,6 +174,10 @@ class PricingGridComponent extends PolymerElement {
           }
           .tierName {
             margin: 0;
+            font-size: 1em;
+          }
+          .tierPrice {
+            font-size: 1em;
           }
           .tierDisplays {
             margin: 0;
