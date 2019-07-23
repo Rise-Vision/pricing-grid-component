@@ -136,12 +136,12 @@ class PricingGridComponent extends PolymerElement {
           align-items: center;
         }
         .tierName {
-          font-size: 1.5em;;
+          font-size: 18px;;
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
           letter-spacing: normal;
-          color: #979797;
+          color: #999999;
           margin-right: 1em;
         }
         .tierDisplays {
@@ -149,16 +149,16 @@ class PricingGridComponent extends PolymerElement {
           font-style: normal;
           font-stretch: normal;
           letter-spacing: normal;
-          color: #979797;
+          color: #999999;
         }
         .tierPrice {
-          font-size: 1.5em;
+          font-size: 18px;
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
           letter-spacing: normal;
           text-align: right;
-          color: #979797;
+          color: #999999;
         }
         .tierDescription {
           display: flex;
