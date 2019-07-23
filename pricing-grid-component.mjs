@@ -108,7 +108,7 @@ class PricingGridComponent extends PolymerElement {
         }
         .gridRectangle {
           height: 100%;
-          border-radius: 5px;
+          border-radius: 4px;
           border: solid 1px #979797;
           display: flex;
           flex-direction: column;
