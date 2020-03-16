@@ -138,7 +138,7 @@
           component.pricingData = pricingData;
           component.period = "yearly"
 
-          chai.assert.equal(advancedTier.querySelectorAll("span")[2].innerText, "$7.33");
+          chai.assert.equal(advancedTier.querySelectorAll("span")[1].innerText, "$7.33");
         });
 
         it("shows monthly pricing when monthly period is selected", ()=>{
@@ -151,7 +151,7 @@
           component.pricingData = pricingData;
           component.period = "monthly"
 
-          chai.assert.equal(advancedTier.querySelectorAll("span")[2].innerText, expectedPrice);
+          chai.assert.equal(advancedTier.querySelectorAll("span")[1].innerText, expectedPrice);
         });
       });
     </script>
