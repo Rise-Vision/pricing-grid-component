@@ -128,28 +128,21 @@ class PricingGridComponent extends PolymerElement {
           background-color: #e8e8e8;
           box-shadow:inset 0px 0px 0px 2px #000000;
         }
-        .gridRow[selected] .tierName,.gridRow[selected] .tierPrice {
+        .gridRow[selected] .tierDisplays,.gridRow[selected] .tierPrice {
           color: black;
         }
 
         .tierDescription {
           align-items: center;
         }
-        .tierName {
-          font-size: 18px;;
-          font-weight: bold;
-          font-style: normal;
-          font-stretch: normal;
-          letter-spacing: normal;
-          color: #999999;
-          margin-right: 1em;
-        }
         .tierDisplays {
+          font-size: 18px;
           font-weight: 500;
           font-style: normal;
           font-stretch: normal;
           letter-spacing: normal;
           color: #999999;
+          margin-right: 1em;
         }
         .tierPrice {
           font-size: 18px;
@@ -169,16 +162,13 @@ class PricingGridComponent extends PolymerElement {
           .gridRow {
             text-align: left;
           }
-          .tierName {
-            margin: 0;
-            font-size: 1em;
-          }
           .tierPrice {
             font-size: 1em;
           }
           .tierDisplays {
             margin: 0;
             display: block;
+            font-size: 1em;
           }
           .tierDescription {
             flex-direction: column;
@@ -190,7 +180,6 @@ class PricingGridComponent extends PolymerElement {
         <div id="gridContainer" class="gridRectangle">
           <div id="tierStarter" class="gridRow" selected$=[[isStarter]]>
             <div class="tierDescription">
-              <span class="tierName">Starter</span>
               <span class="tierDisplays">
                 [[getLowerLimit(pricingData, period, 0)]]-[[getUpperLimit(pricingData, period, 0)]] Displays
               </span>
@@ -199,7 +188,6 @@ class PricingGridComponent extends PolymerElement {
           </div>
           <div id="tierBasic" class="gridRow" selected$=[[isBasic]]>
             <div class="tierDescription">
-              <span class="tierName">Basic</span>
               <span class="tierDisplays">
                 [[getLowerLimit(pricingData, period, 1)]]-[[getUpperLimit(pricingData, period, 1)]] Displays
               </span>
@@ -208,7 +196,6 @@ class PricingGridComponent extends PolymerElement {
           </div>
           <div id="tierAdvanced" class="gridRow" selected$=[[isAdvanced]]>
             <div class="tierDescription">
-              <span class="tierName">Advanced</span>
               <span class="tierDisplays">
                 [[getLowerLimit(pricingData, period, 2)]]-[[getUpperLimit(pricingData, period, 2)]] Displays
               </span>
@@ -217,7 +204,6 @@ class PricingGridComponent extends PolymerElement {
           </div>
           <div id="tierEnterprise" class="gridRow" selected$=[[isEnterprise]]>
             <div class="tierDescription">
-              <span class="tierName">Enterprise</span>
               <span class="tierDisplays">
                 [[getLowerLimit(pricingData, period, 3)]] or more Displays
               </span>
